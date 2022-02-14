@@ -10,7 +10,7 @@
 class MyString {
 private:
 	char* m_data;//指针指向字符数组，4字节
-	int m_size;//字符串长度
+	size_t m_size;//字符串长度
 public:
 	//构造函数
 	MyString(const char* cstr = 0);//1、无参构造 2、使用c风格字符串构造
@@ -31,7 +31,7 @@ public:
 	//返回C风格字符串
 	char* get_c_str() const { return m_data; }
 	//返回字符串长度
-	int size() const { return m_size; }
+	size_t size() const { return m_size; }
 	//返回由pos开始的n个字符组成的字符串
 	MyString substr(int pos , int n) const;
 	//在pos处插入,结果传入原先存在的变量中，返回引用
@@ -86,6 +86,7 @@ MyString::MyString(const MyString& str) {//拷贝构造函数，深拷贝
 	m_size = strlen(str.m_data);
 }
 MyString::MyString(int n, const char c) {
+    if(n < 0)	throw exception("无效的个数！");
 	m_data = new char[n + 1];
 	m_size = n;
 	int i;
@@ -187,7 +188,7 @@ MyString MyString::substr(int pos, int n) const {
 	//验证pos合法性
 	//验证pos+n是否超过长度
 	int len = n;
-	if (pos < 0 || pos >= m_size) {
+	if (pos < 0 || pos >= m_size || n < 0) {
 		//抛出越界异常
 		throw exception("无效的索引位置！");
 	}
@@ -200,9 +201,9 @@ MyString MyString::substr(int pos, int n) const {
 		res[i] = m_data[pos + i];
 	}
 	res[i] = '\0';
-	MyString reslut(res);
+	MyString reslut(res);//重新包装为MyString对象
 	delete[] res;
-	return reslut;
+	return reslut;//在函数结束后会调用reslut对象的析构函数，在接收端调用拷贝构造函数生成结果对象
 }
 ```
 

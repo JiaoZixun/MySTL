@@ -63,6 +63,8 @@ int main() {
 	cout << "str4.find(str2):" << str4.find(str2) << endl;
 
 	MyString str8 = "www.baidu.com";
+	MyString str9 = str8.substr(0, 0);
+	cout << "str9:" << str9 << endl;
 	vector<MyString>ans = str8.split(".");
 	for (auto it : ans)	cout << it << endl;
 	return 0;

@@ -138,7 +138,7 @@ MyString MyString::substr(int pos, int n) const {
 	//验证pos合法性
 	//验证pos+n是否超过长度
 	int len = n;
-	if (pos < 0 || pos >= m_size) {
+	if (pos < 0 || pos >= m_size || n < 0) {
 		//抛出越界异常
 		throw exception("无效的索引位置！");
 	}

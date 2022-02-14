@@ -12,7 +12,7 @@ using namespace std;
 class MyString {
 private:
 	char* m_data;//指针指向字符数组，4字节
-	int m_size;//字符串长度
+	size_t m_size;//字符串长度
 public:
 	//构造函数
 	//声明时用默认参数，在定义时需要删除，否则出现重定义默认参数
@@ -44,7 +44,7 @@ public:
 	//返回C风格字符串
 	char* get_c_str() const { return m_data; }
 	//返回字符串长度
-	int size() const { return m_size; }
+	size_t size() const { return m_size; }
 	//返回由pos开始的n个字符组成的字符串
 	MyString substr(int pos , int n) const;
 	//在pos处插入,结果传入原先存在的变量中，返回引用
