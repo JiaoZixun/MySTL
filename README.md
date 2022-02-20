@@ -6,7 +6,7 @@ MyString------->已实现
 
 MyVector------->已实现
 
-MyList------->未实现
+MyList------->已实现
 
 MyDeque------->未实现
 
